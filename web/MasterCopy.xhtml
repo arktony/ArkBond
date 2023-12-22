@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">ARKBONDS - mastercopy</ui:define>
+
+    <ui:define name="content">
+
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+        <h:form id="tableForm">
+            <p:idleMonitor timeout="#{login.sessionTimeout}">
+                <p:ajax event="idle" listener="#{login.onIdle}"/>
+            </p:idleMonitor>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <font size="4" style="font-weight: bold;">Master Copy</font>
+                   
+                    <hr/>
+                    <h:panelGrid id="topbarinbond" columns="14" styleClass="ui-panelgrid-blank grid-pad" style="margin-top:10px">
+
+                        <h:commandLink>
+                            <p:graphicImage name="images/xcel.png" library="verona-layout" width="30"/>
+                            <p:dataExporter type="xls" target="inbondTable" fileName="mastercopyVehicles" />
+                        </h:commandLink>
+                    </h:panelGrid>
+
+                </div>
+
+                <div>
+                    <p:dataTable id="inbondTable" var="inbondx" value="#{mastercopy.inBondVehicles}" selectionMode="single" reflow="true"
+                                 rowIndexVar="index"  tableStyle="width:auto"   resizeMode="true" draggableColumns="true"  draggableRows="true"   selection="#{mastercopy.selectedInBondVehicles}" rowKey="#{inbondx.id}" paginator="true" rows="15">
+
+                        <p:ajax event="rowSelect" listener="#{mastercopy.selectionListener()}" update="@form"/>
+                        <p:column headerText="sNo" style="width:30px;text-align: center">
+                            <h:outputText value="#{index + 1}" />
+                        </p:column>
+                        <p:column headerText="Arrival Date"  filterBy="#{inbondx.arrDate}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.arrDate}" />
+                        </p:column>
+
+                        <p:column headerText="IR No."  filterBy="#{inbondx.irNo}"   style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.irNo}" />
+                        </p:column>
+                        <p:column headerText="Release Date"  filterBy="#{inbondx.relDate}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.relDate}" />
+                        </p:column>
+                        
+                        <p:column headerText="Exit Note No."  filterBy="#{inbondx.exitNoteNo}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.exitNoteNo}" />
+                        </p:column>
+
+                        <p:column headerText="Entry No."  filterBy="#{inbondx.entryNo}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.entryNo}" />
+                        </p:column>
+
+                        <p:column headerText="Spec Code."  filterBy="#{inbondx.specCode}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.specCode}" />
+                        </p:column>
+
+                       <p:column headerText="T1 No."  filterBy="#{inbondx.t1No}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.t1No}" />
+                        </p:column>
+
+                        <p:column headerText="T1 Date."  filterBy="#{inbondx.tiDate}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.tiDate}" />
+                        </p:column>
+
+                        <p:column headerText="IM7 No."  filterBy="#{inbondx.im7No}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.im7No}" />
+                        </p:column>
+
+                        <p:column headerText="IM7 Date"  filterBy="#{inbondx.im7Date}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.im7Date}" />
+                        </p:column>
+                        <p:column headerText="IM4 No."  filterBy="#{inbondx.im4}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.im4}" />
+                        </p:column>
+                        <p:column headerText="Ext8"  filterBy="#{inbondx.ext8}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.ext8}" />
+                        </p:column>
+                        
+                        <p:column headerText="Ext8 Date"  filterBy="#{inbondx.ext8date}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.ext8date}" />
+                        </p:column>
+                        
+                        <p:column headerText="Reg No."  filterBy="#{inbondx.regNo}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.regNo}" />
+                        </p:column>
+                        
+                        <p:column headerText="Importer"  filterBy="#{inbondx.importer}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.importer}" />
+                        </p:column>
+
+                        <p:column headerText="Clearing Agent"  filterBy="#{inbondx.clearingAgent}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.clearingAgent}" />
+                        </p:column>
+                        
+                        <p:column headerText="YOM"  filterBy="#{inbondx.year}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.year}" />
+                        </p:column>
+                        
+                        <p:column headerText="Vehicle Make"  filterBy="#{inbondx.vehicleMake}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.vehicleMake}" />
+                        </p:column>
+
+                        <p:column headerText="Chassis No"  filterBy="#{inbondx.chassisNo}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.chassisNo}" />
+                        </p:column>
+
+                        <p:column headerText="BIF"  filterBy="#{inbondx.BIF}"  style="text-align:right">
+                            <h:outputText value="#{inbondx.BIF}">
+                                <f:convertNumber type="currency" pattern="¤#,##0.0" currencySymbol="" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="TAP"  filterBy="#{inbondx.tap}"  style="text-align:right">
+                            <h:outputText value="#{inbondx.tap}">
+                                <f:convertNumber type="currency" pattern="¤#,##0.0" currencySymbol="" />
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Exit Point"  filterBy="#{inbondx.exitpoint}"  style="white-space:nowrap;">
+                            <h:outputText value="#{inbondx.exitpoint}" />
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
